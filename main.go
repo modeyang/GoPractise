@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/modeyang/GoPractise/interfaces"
-	"github.com/modeyang/GoPractise/times"
+	"github.com/modeyang/GoPractise/debug"
+	"time"
+	"github.com/modeyang/GoPractise/web"
 )
 
 //  for range 遍历数组时，是否遍历的是副本？请写程序验证一下
@@ -22,5 +24,17 @@ func main() {
 	var a interfaces.A = &interfaces.B{}
 	fmt.Println(a.Haha(1))
 
-	times.Timestamp()
+	debug.SetupStackTrap()
+
+	t := time.NewTimer(3 * time.Second)
+
+	go func() {
+		select {
+		case <- t.C:
+			debug.StartStack()
+		}
+	}()
+
+	time.Sleep(10 * time.Second)
+	//web.NewEndlessServer(5070)
 }

@@ -32,3 +32,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/fvbock/endless"
+
+[[constraint]]
+  name = "github.com/willf/bitset"
+  version = "1.1.3"
